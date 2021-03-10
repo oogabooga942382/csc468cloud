@@ -13,6 +13,6 @@ while [ ! -f /opt/keys/kube_done ]; do
   sleep 20
 done
 
-command=`tail -n 2 /opt/keys/kube.log`
+command=`tail -n 2 /opt/keys/kube.log | tr -d '\\'`
 echo $command
 sudo $command
