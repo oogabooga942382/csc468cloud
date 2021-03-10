@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -x
 sudo apt-get install -y nfs-common
 sudo mkdir -p /opt/keys
 
@@ -13,4 +14,5 @@ while [ ! -f /opt/keys/kube.log ]; do
 done
 
 command=`tail -n 2 /opt/keys/kube.log`
+echo $command
 sudo $command
