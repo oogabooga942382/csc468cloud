@@ -9,11 +9,10 @@ while [ ! -d /opt/keys/flagdir ]; do
   sleep 10
 done
 
-while [ ! -f /opt/keys/kube.log ]; do
+while [ ! -f /opt/keys/kube_done ]; do
   sleep 20
 done
 
-sleep 30
 command=`tail -n 2 /opt/keys/kube.log`
 echo $command
 sudo $command
