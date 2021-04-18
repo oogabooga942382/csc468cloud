@@ -20,9 +20,11 @@ request.addTour(tour)
 prefixForIP = "192.168.1."
 link = request.LAN("lan")
 
-num_nodes = 3
+num_nodes = 4
 for i in range(num_nodes):
   if i == 0:
+    node = request.XenVM("jenkins")
+  elif i == 1:
     node = request.XenVM("head")
   else:
     node = request.XenVM("worker-" + str(i))
@@ -43,6 +45,7 @@ for i in range(num_nodes):
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_jenkins.sh"))
+  elif i == 1:
     node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/kube_manager.sh"))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/kube_worker.sh"))
