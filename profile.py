@@ -36,18 +36,16 @@ for i in range(num_nodes):
   iface.component_id = "eth1"
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
-  
-  # setup Docker
-  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
-  # setup Kubernetes
-  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_kubernetes.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo swapoff -a"))
-  
+
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_jenkins.sh"))
-  elif i == 1:
-    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/kube_manager.sh"))
   else:
-    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/kube_worker.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_kubernetes.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo swapoff -a"))
+    if i == 1:
+      node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/kube_manager.sh"))
+    else:
+      node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/kube_worker.sh"))
     
 pc.printRequestRSpec(request)
