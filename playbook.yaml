@@ -6,6 +6,5 @@
     - jenkins
   roles:
     - role: geerlingguy.jenkins
-    - role: geerlingguy.docker
 
 
