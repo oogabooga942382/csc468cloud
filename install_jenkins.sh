@@ -9,4 +9,3 @@ ansible-galaxy install geerlingguy.jenkins
 # This is very bad. Do not do this in production. 
 sudo chmod 777 /var/run/docker.sock
 
-#ansible-galaxy install geerlingguy.docker
